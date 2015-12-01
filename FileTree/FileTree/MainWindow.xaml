@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileTree"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="451.589" Width="565.784">
+    <StackPanel>
+        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="558">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>size</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>Allocated</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>Files</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>Folders</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>% of Parent</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader>Last Modified</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
 </Window>

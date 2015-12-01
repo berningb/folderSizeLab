@@ -1,1 +1,2 @@
 C:\Users\FBGM\Desktop\fileSizeLab\FileTree\FileTree\bin\Debug\FileTree.exe.config
+C:\Users\FBGM\Desktop\fileSizeLab\folderSizeLab\FileTree\FileTree\bin\Debug\FileTree.exe.config
