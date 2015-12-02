@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="451.589" Width="565.784">
     <StackPanel>
-        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="558">
+        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" MinWidth="558">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50">
