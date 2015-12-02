@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileTree"
         mc:Ignorable="d"
-        Title="MainWindow" Height="451.589" Width="565.784">
+        Title="MainWindow" Height="465.589" Width="565.784">
+
     <StackPanel>
-        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" MinWidth="558">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File"/>
+                <MenuItem Header="Scan"/>
+                <MenuItem Header="View"/>
+                <MenuItem Header="Expand"/>
+                <MenuItem Header="Options"/>
+                <MenuItem Header="Help"/>
+            </Menu>
+        </DockPanel>
+        <ListView x:Name="treeView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50">
@@ -48,5 +59,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+
     </StackPanel>
 </Window>
