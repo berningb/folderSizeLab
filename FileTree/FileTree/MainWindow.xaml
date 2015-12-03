@@ -31,31 +31,6 @@
                             <GridViewColumnHeader>size</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader>Allocated</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader>Files</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader>Folders</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader>% of Parent</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader>Last Modified</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
