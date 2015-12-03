@@ -41,9 +41,33 @@ namespace FileTree {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 21 "..\..\MainWindow.xaml"
+        #line 13 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListView treeView;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 54 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid treeFileDataGrid;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 56 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGridTextColumn nameColumn;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 57 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGridTextColumn sizeColumn;
         
         #line default
         #line hidden
@@ -79,7 +103,24 @@ namespace FileTree {
             switch (connectionId)
             {
             case 1:
+            
+            #line 8 "..\..\MainWindow.xaml"
+            ((FileTree.MainWindow)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Window_Loaded);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
             this.treeView = ((System.Windows.Controls.ListView)(target));
+            return;
+            case 3:
+            this.treeFileDataGrid = ((System.Windows.Controls.DataGrid)(target));
+            return;
+            case 4:
+            this.nameColumn = ((System.Windows.Controls.DataGridTextColumn)(target));
+            return;
+            case 5:
+            this.sizeColumn = ((System.Windows.Controls.DataGridTextColumn)(target));
             return;
             }
             this._contentLoaded = true;

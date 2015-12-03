@@ -13,3 +13,17 @@ C:\Users\FBGM\Desktop\fileSizeLab\folderSizeLab\FileTree\FileTree\obj\Debug\File
 C:\Users\FBGM\Desktop\fileSizeLab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.csproj.GenerateResource.Cache
 C:\Users\FBGM\Desktop\fileSizeLab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.exe
 C:\Users\FBGM\Desktop\fileSizeLab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.pdb
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\bin\Debug\FileTree.exe.config
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.exe
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.pdb
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\bin\Debug\FileTree.exe
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\bin\Debug\FileTree.pdb
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.csprojResolveAssemblyReference.cache
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\MainWindow.g.cs
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\App.g.cs
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree_MarkupCompile.cache
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree_MarkupCompile.lref
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\MainWindow.baml
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.g.resources
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.Properties.Resources.resources
+C:\Users\Cody Clawson\Desktop\Folder Size Lab\folderSizeLab\FileTree\FileTree\obj\Debug\FileTree.csproj.GenerateResource.Cache
