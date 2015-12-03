@@ -5,6 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileTree"
         mc:Ignorable="d"
+        Title="MainWindow" Height="465.589" Width="565.784">
+
+    <StackPanel>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File"/>
+                <MenuItem Header="Scan"/>
+                <MenuItem Header="View"/>
+                <MenuItem Header="Expand"/>
+                <MenuItem Header="Options"/>
+                <MenuItem Header="Help"/>
+            </Menu>
+        </DockPanel>
+        <ListView x:Name="treeView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         Title="MainWindow" Height="451.589" Width="565.784" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="treeFileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:TreeFile}, CreateList=True}"/>
