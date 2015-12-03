@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileTree"
         mc:Ignorable="d"
-        Title="MainWindow" Height="451.589" Width="565.784">
-    <StackPanel>
-        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" MinWidth="558">
+        Title="MainWindow" Height="451.589" Width="565.784" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="treeFileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:TreeFile}, CreateList=True}"/>
+    </Window.Resources>
+    <StackPanel DataContext="{StaticResource treeFileViewSource}">
+        <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" MinWidth="558" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50">
@@ -48,5 +51,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <DataGrid x:Name="treeFileDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" Margin="7,0,-35,0" RowDetailsVisibilityMode="VisibleWhenSelected" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="100"/>
+                <DataGridTextColumn x:Name="sizeColumn" Binding="{Binding Size}" Header="Size" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
 </Window>
