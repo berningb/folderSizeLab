@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="465.589" Width="565.784">
 
-    <StackPanel>
+    <StackPanel DataContext="{StaticResource treeFileViewSource}">
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File"/>
@@ -23,7 +23,6 @@
     <Window.Resources>
         <CollectionViewSource x:Key="treeFileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:TreeFile}, CreateList=True}"/>
     </Window.Resources>
-    <StackPanel DataContext="{StaticResource treeFileViewSource}">
         <ListView x:Name="treeView" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" MinWidth="558" >
             <ListView.View>
                 <GridView>

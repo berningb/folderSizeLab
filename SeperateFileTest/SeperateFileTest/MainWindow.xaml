@@ -6,20 +6,20 @@
         xmlns:local="clr-namespace:SeperateFileTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    
+
     <StackPanel>
-        
+
         <StackPanel.Resources>
-            <HierarchicalDataTemplate x:Key="ChildTemplate" >
-                <TextBlock FontStyle="Italic" Text="{Binding Path=Title}" />
+            <HierarchicalDataTemplate x:Key="ChildTemplate" ItemsSource="{Binding Path=ChildDirectories}" >
+                <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" />
             </HierarchicalDataTemplate>
             <HierarchicalDataTemplate x:Key="NameTemplate" 
-        ItemsSource="{Binding Path=ChildTopics}" 
+        ItemsSource="{Binding Path=ChildDirectories}" 
         ItemTemplate="{StaticResource ChildTemplate}">
-                <TextBlock Text="{Binding Path=Title}" FontWeight="Bold" />
+                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
             </HierarchicalDataTemplate>
         </StackPanel.Resources>
-        
+
         <TreeView Width="400"  Height="300" ItemsSource="{Binding}" 
     ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView" />
     </StackPanel>
