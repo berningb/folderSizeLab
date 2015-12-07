@@ -39,7 +39,7 @@ namespace SeperateFileTest
             //    DataGridTopic.ChildTopics[0].ChildTopics.Add(new Topic("Grandchild", 4));
             //Topics.Add(DataGridTopic);
 
-            Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop\\Node Practice"));
+            Treefile start = new Treefile(new DirectoryInfo(@"C:\wamp\www\trying"));
             files.Add(start);
 
             myTreeView.DataContext = files;
