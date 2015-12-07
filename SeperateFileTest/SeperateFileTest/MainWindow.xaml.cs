@@ -39,12 +39,12 @@ namespace SeperateFileTest
             //    DataGridTopic.ChildTopics[0].ChildTopics.Add(new Topic("Grandchild", 4));
             //Topics.Add(DataGridTopic);
 
-            Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop\\Node Practice"));
+            Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
             files.Add(start);
 
             myTreeView.DataContext = files;
+            myListView.DataContext = files;
           }
-
         public class Treefile
         {
             public string Name { get; set; }
@@ -95,7 +95,15 @@ namespace SeperateFileTest
 
             private long getSize(DirectoryInfo d)
             {
-                return 0;
+                long size = 0;
+                foreach(DirectoryInfo s  in d.EnumerateDirectories())
+                {
+                    foreach(FileInfo f in s.EnumerateFiles())
+                    {
+                        size += f.Length;
+                    }
+                }
+                return size;
             }
         }
     }
