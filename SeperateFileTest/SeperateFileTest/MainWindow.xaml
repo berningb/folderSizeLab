@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeperateFileTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="548" Width="790.5">
 
     <StackPanel>
 
@@ -16,11 +16,43 @@
             <HierarchicalDataTemplate x:Key="NameTemplate" 
         ItemsSource="{Binding Path=ChildDirectories}" 
         ItemTemplate="{StaticResource ChildTemplate}">
-                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
+                <Grid>
+                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="100"/>
+                </Grid>
             </HierarchicalDataTemplate>
         </StackPanel.Resources>
 
         <TreeView Width="400"  Height="300" ItemsSource="{Binding}" 
     ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView" />
+
+        <ListView ItemsSource="{Binding}" x:Name="myListView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="200"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TreeView BorderThickness="0" ItemsSource="{Binding ChildDirectories}" ItemTemplate="{StaticResource NameTemplate}" >
+                                    </TreeView>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Size" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Size}" TextAlignment="Right" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
     </StackPanel>
 </Window>

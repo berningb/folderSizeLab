@@ -43,8 +43,8 @@ namespace SeperateFileTest
             files.Add(start);
 
             myTreeView.DataContext = files;
+            myListView.DataContext = files;
           }
-
         public class Treefile
         {
             public string Name { get; set; }
@@ -95,7 +95,15 @@ namespace SeperateFileTest
 
             private long getSize(DirectoryInfo d)
             {
-                return 0;
+                long size = 0;
+                foreach(DirectoryInfo s  in d.EnumerateDirectories())
+                {
+                    foreach(FileInfo f in s.EnumerateFiles())
+                    {
+                        size += f.Length;
+                    }
+                }
+                return size;
             }
         }
     }
