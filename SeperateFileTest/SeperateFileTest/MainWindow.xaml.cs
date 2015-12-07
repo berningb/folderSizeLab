@@ -43,7 +43,6 @@ namespace SeperateFileTest
             files.Add(start);
 
             myTreeView.DataContext = files;
-            myListView.DataContext = files;
           }
         public class Treefile
         {

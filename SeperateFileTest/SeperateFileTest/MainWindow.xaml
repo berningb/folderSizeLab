@@ -11,48 +11,24 @@
 
         <StackPanel.Resources>
             <HierarchicalDataTemplate x:Key="ChildTemplate" ItemsSource="{Binding Path=ChildDirectories}" >
-                <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" />
+                   <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                </StackPanel>
             </HierarchicalDataTemplate>
             <HierarchicalDataTemplate x:Key="NameTemplate" 
         ItemsSource="{Binding Path=ChildDirectories}" 
         ItemTemplate="{StaticResource ChildTemplate}">
-                <Grid>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="100"/>
-                </Grid>
+                    <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                </StackPanel>
             </HierarchicalDataTemplate>
         </StackPanel.Resources>
 
         <TreeView Width="400"  Height="300" ItemsSource="{Binding}" 
     ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView" />
 
-        <ListView ItemsSource="{Binding}" x:Name="myListView">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" Width="200"  >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TreeView BorderThickness="0" ItemsSource="{Binding ChildDirectories}" ItemTemplate="{StaticResource NameTemplate}" >
-                                    </TreeView>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Size" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Size}" TextAlignment="Right" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="VerticalContentAlignment" Value="Top" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
 
     </StackPanel>
 </Window>
