@@ -22,15 +22,17 @@ namespace SeperateFileTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        // creates a collection of treeefiles to bind the treeview to
         static public ObservableCollection<Treefile> files = new ObservableCollection<Treefile>();
         public MainWindow()
         {
-            InitializeComponent();
-            Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
-            files.Add(start);
+            //InitializeComponent();
+            //Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
+            //files.Add(start);
 
-            myTreeView.DataContext = files;
-          }
+            ////set the datacontext of our treeview to our list of tree files
+            //myTreeView.DataContext = files;
+        }
         public class Treefile
         {
             public string Name { get; set; }
@@ -39,6 +41,7 @@ namespace SeperateFileTest
             private ObservableCollection<Treefile> childTopicsValue = new ObservableCollection<Treefile>();
             private ObservableCollection<FileInfo> childfilevalues = new ObservableCollection<FileInfo>();
 
+            // stores all the subdirectories of this treefile
             public ObservableCollection<Treefile> ChildDirectories
             {
                 get
@@ -51,6 +54,7 @@ namespace SeperateFileTest
                 }
             }
 
+            // a collection of all the files in the directory
             public ObservableCollection<FileInfo> Childfiles
             {
                 get
@@ -62,14 +66,17 @@ namespace SeperateFileTest
                     childfilevalues = value;
                 }
             }
+
             public Treefile() { }
+            //constructor takes a directory and gets its size and name and creates a new treefile for all of its subdirectories
             public Treefile(DirectoryInfo d)
             {
                 Name = d.Name;
                 Size = getSize(d);
                 myDir = d;
 
-                foreach(var child in d.EnumerateDirectories()) {
+                foreach (var child in d.EnumerateDirectories())
+                {
                     Treefile childtree = new Treefile(child);
                     ChildDirectories.Add(childtree);
                 }
@@ -79,10 +86,11 @@ namespace SeperateFileTest
                 }
             }
 
+            // get the size of all the files in the current directory and recursivelly call all the subdirectories to get their file sizes
             public static long getSize(DirectoryInfo d)
             {
                 long Size = 0;
-             
+
                 foreach (FileInfo fi in d.GetFiles())
                 {
                     Size += fi.Length;
@@ -92,6 +100,31 @@ namespace SeperateFileTest
                     Size += getSize(di);
                 }
                 return (Size);
+            }
+        }
+
+        private void srchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Treefile start = new Treefile(new DirectoryInfo(srchbox.Text));
+                files.Clear();
+                files.Add(start);
+
+                //set the datacontext of our treeview to our list of tree files
+                myTreeView.DataContext = files;
+            }
+            catch (System.ArgumentException)
+            {
+                MessageBox.Show("Your directory is not a valid format");
+            }
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                MessageBox.Show("That directory was not found");
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                MessageBox.Show("This program does not have access to all the files in this directory");
             }
         }
     }
