@@ -26,19 +26,6 @@ namespace SeperateFileTest
         public MainWindow()
         {
             InitializeComponent();
-
-            //Topics.Add(new Topic("Using Controls and Dialog Boxes", -1));
-            //Topics.Add(new Topic("Getting Started with Controls", 1));
-            //Topic DataGridTopic = new Topic("DataGrid", 4);
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("Default Keyboard and Mouse Behavior in the DataGrid Control", -1));
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("How to: Add a DataGrid Control to a Page", -1));
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("How to: Display and Configure Row Details in the DataGrid Control", 1));
-            //    DataGridTopic.ChildTopics[0].ChildTopics.Add(new Topic("Grandchild", 4));
-            //Topics.Add(DataGridTopic);
-
             Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
             files.Add(start);
 
@@ -92,17 +79,19 @@ namespace SeperateFileTest
                 }
             }
 
-            private long getSize(DirectoryInfo d)
+            public static long getSize(DirectoryInfo d)
             {
-                long size = 0;
-                foreach(DirectoryInfo s  in d.EnumerateDirectories())
+                long Size = 0;
+             
+                foreach (FileInfo fi in d.GetFiles())
                 {
-                    foreach(FileInfo f in s.EnumerateFiles())
-                    {
-                        size += f.Length;
-                    }
+                    Size += fi.Length;
                 }
-                return size;
+                foreach (DirectoryInfo di in d.GetDirectories())
+                {
+                    Size += getSize(di);
+                }
+                return (Size);
             }
         }
     }

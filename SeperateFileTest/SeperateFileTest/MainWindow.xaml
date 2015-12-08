@@ -13,16 +13,17 @@
             <HierarchicalDataTemplate x:Key="ChildTemplate" ItemsSource="{Binding Path=ChildDirectories}" >
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                    <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" Width="150" />
-                   <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                        <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" Width="200" />
+                        <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="200"/>
+                        <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
-                    <ListBox ItemsSource="{Binding Childfiles}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+
                 </StackPanel>
             </HierarchicalDataTemplate>
             <HierarchicalDataTemplate x:Key="NameTemplate" 
@@ -30,22 +31,30 @@
         ItemTemplate="{StaticResource ChildTemplate}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="150"/>
-                    <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="200"/>
+                        <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="200"/>
+                        <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <TextBlock Text="{Binding length}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
-                    <ListBox ItemsSource="{Binding Childfiles}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                  </StackPanel>
+
+                </StackPanel>
             </HierarchicalDataTemplate>
         </StackPanel.Resources>
-
-        <TreeView Width="600"  Height="300" ItemsSource="{Binding}" 
-    ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView" />
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Directories" Width="200"></Label>
+            <Label Content="Size" Width="200"></Label>
+            <Label Content="Files" Width="200"></Label>
+        </StackPanel>
+        <TreeView  Height="486" ItemsSource="{Binding}" 
+        	ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView"  Margin="15,0,0,0"  />
 
 
     </StackPanel>
