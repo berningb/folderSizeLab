@@ -22,36 +22,28 @@ namespace SeperateFileTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        // creates a collection of treeefiles to bind the treeview to
         static public ObservableCollection<Treefile> files = new ObservableCollection<Treefile>();
         public MainWindow()
         {
             InitializeComponent();
+            //Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
+            //files.Add(start);
 
-            //Topics.Add(new Topic("Using Controls and Dialog Boxes", -1));
-            //Topics.Add(new Topic("Getting Started with Controls", 1));
-            //Topic DataGridTopic = new Topic("DataGrid", 4);
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("Default Keyboard and Mouse Behavior in the DataGrid Control", -1));
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("How to: Add a DataGrid Control to a Page", -1));
-            //DataGridTopic.ChildTopics.Add(
-            //    new Topic("How to: Display and Configure Row Details in the DataGrid Control", 1));
-            //    DataGridTopic.ChildTopics[0].ChildTopics.Add(new Topic("Grandchild", 4));
-            //Topics.Add(DataGridTopic);
-
-            Treefile start = new Treefile(new DirectoryInfo(@"C:\Users\FBGM\Desktop"));
-            files.Add(start);
-
-            myTreeView.DataContext = files;
-          }
+            ////set the datacontext of our treeview to our list of tree files
+            //myTreeView.DataContext = files;
+        }
         public class Treefile
         {
             public string Name { get; set; }
+            public string percentsize { get; set; }
             public long Size { get; set; }
+            public Treefile parent { get; set; }
             public DirectoryInfo myDir { get; set; }
             private ObservableCollection<Treefile> childTopicsValue = new ObservableCollection<Treefile>();
             private ObservableCollection<FileInfo> childfilevalues = new ObservableCollection<FileInfo>();
 
+            // stores all the subdirectories of this treefile
             public ObservableCollection<Treefile> ChildDirectories
             {
                 get
@@ -64,6 +56,7 @@ namespace SeperateFileTest
                 }
             }
 
+            // a collection of all the files in the directory
             public ObservableCollection<FileInfo> Childfiles
             {
                 get
@@ -75,14 +68,37 @@ namespace SeperateFileTest
                     childfilevalues = value;
                 }
             }
+
             public Treefile() { }
+            //constructor takes a directory and gets its size and name and creates a new treefile for all of its subdirectories
             public Treefile(DirectoryInfo d)
             {
                 Name = d.Name;
                 Size = getSize(d);
                 myDir = d;
+                parent = this;
+                foreach (var child in d.EnumerateDirectories())
+                {
+                    Treefile childtree = new Treefile(child);
+                    ChildDirectories.Add(childtree);
+                }
+                foreach (var c in myDir.EnumerateFiles())
+                {
+                    Childfiles.Add(c);
+                }
+            }
+            //constructor takes a directory and a parent and gets its size and name and creates a new treefile for all of its subdirectories
+            // the parent is used to get the percent of parent parameter
 
-                foreach(var child in d.EnumerateDirectories()) {
+            public Treefile(DirectoryInfo d, Treefile parent)
+            {
+                Name = d.Name;
+                Size = getSize(d);
+                myDir = d;
+                this.parent = parent;
+                this.percentsize = calculatepercent();
+                foreach (var child in d.EnumerateDirectories())
+                {
                     Treefile childtree = new Treefile(child);
                     ChildDirectories.Add(childtree);
                 }
@@ -92,17 +108,55 @@ namespace SeperateFileTest
                 }
             }
 
-            private long getSize(DirectoryInfo d)
+            private string calculatepercent()
             {
-                long size = 0;
-                foreach(DirectoryInfo s  in d.EnumerateDirectories())
+                return Math.Round((Decimal)(this.Size / parent.Size), 2) + "%";
+            }
+
+            // get the size of all the files in the current directory and recursivelly call all the subdirectories to get their file sizes
+            public static long getSize(DirectoryInfo d)
+            {
+                long Size = 0;
+
+                foreach (FileInfo fi in d.GetFiles())
                 {
-                    foreach(FileInfo f in s.EnumerateFiles())
-                    {
-                        size += f.Length;
-                    }
+                    Size += fi.Length;
+
                 }
-                return size;
+                foreach (DirectoryInfo di in d.GetDirectories())
+                {
+                    Size += getSize(di);
+                }
+                return (Size);
+            }
+        }
+
+        private void srchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Treefile start = new Treefile(new DirectoryInfo(srchbox.Text));
+                files.Clear();
+                files.Add(start);
+
+                //set the datacontext of our treeview to our list of tree files
+                myTreeView.DataContext = files;
+            }
+            catch (System.ArgumentException)
+            {
+                MessageBox.Show("Your directory is not a valid format");
+            }
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                MessageBox.Show("That directory was not found");
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                MessageBox.Show("This program does not have access to all the files in this directory");
+            }
+            catch (System.IO.PathTooLongException)
+            {
+                MessageBox.Show("This filepath does meet the required length of < 260 characters");
             }
         }
     }

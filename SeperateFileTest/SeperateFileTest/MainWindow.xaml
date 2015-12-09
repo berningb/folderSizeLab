@@ -6,28 +6,58 @@
         xmlns:local="clr-namespace:SeperateFileTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="548" Width="790.5">
-
+    <Window.Resources>
+        <local:filesizeconvertor x:Key="filesizeconvertor"/>
+    </Window.Resources>
     <StackPanel>
-
         <StackPanel.Resources>
             <HierarchicalDataTemplate x:Key="ChildTemplate" ItemsSource="{Binding Path=ChildDirectories}" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" />
-                   <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5" Width="200">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding Name}"></Label>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
                 </StackPanel>
             </HierarchicalDataTemplate>
             <HierarchicalDataTemplate x:Key="NameTemplate" 
         ItemsSource="{Binding Path=ChildDirectories}" 
         ItemTemplate="{StaticResource ChildTemplate}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="100"/>
-                    <TextBlock Text="{Binding Path=Size}" FontWeight="Bold" Width="100"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" Width="200">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
                 </StackPanel>
             </HierarchicalDataTemplate>
         </StackPanel.Resources>
-        <TreeView Width="400"  Height="300" ItemsSource="{Binding}" 
-    ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView" />
-
-
+        <StackPanel Orientation="Horizontal">
+            <TextBox Width="200" Margin="10,5,0,10" Name="srchbox"></TextBox>
+            <Button Content="Search" Name="srchbtn" Height="22" Margin="0,5,0,10" Click="srchbtn_Click"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Directories" Width="200" Margin="10,0,0,0"></Label>
+            <Label Content="Size" Width="200"></Label>
+            <Label Content="Files" Width="200"></Label>
+        </StackPanel>
+        <TreeView  Height="488" ItemsSource="{Binding}" 
+        	ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView"  Margin="15,0,0,0"  />
     </StackPanel>
 </Window>
