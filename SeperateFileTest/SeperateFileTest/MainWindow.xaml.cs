@@ -26,7 +26,7 @@ namespace SeperateFileTest
         static public ObservableCollection<Treefile> files = new ObservableCollection<Treefile>();
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
             //Treefile start = new Treefile(new DirectoryInfo("C:\\Users\\Cody Clawson\\Desktop"));
             //files.Add(start);
 
@@ -36,7 +36,9 @@ namespace SeperateFileTest
         public class Treefile
         {
             public string Name { get; set; }
+            public string percentsize { get; set; }
             public long Size { get; set; }
+            public Treefile parent { get; set; }
             public DirectoryInfo myDir { get; set; }
             private ObservableCollection<Treefile> childTopicsValue = new ObservableCollection<Treefile>();
             private ObservableCollection<FileInfo> childfilevalues = new ObservableCollection<FileInfo>();
@@ -74,7 +76,27 @@ namespace SeperateFileTest
                 Name = d.Name;
                 Size = getSize(d);
                 myDir = d;
+                parent = this;
+                foreach (var child in d.EnumerateDirectories())
+                {
+                    Treefile childtree = new Treefile(child);
+                    ChildDirectories.Add(childtree);
+                }
+                foreach (var c in myDir.EnumerateFiles())
+                {
+                    Childfiles.Add(c);
+                }
+            }
+            //constructor takes a directory and a parent and gets its size and name and creates a new treefile for all of its subdirectories
+            // the parent is used to get the percent of parent parameter
 
+            public Treefile(DirectoryInfo d, Treefile parent)
+            {
+                Name = d.Name;
+                Size = getSize(d);
+                myDir = d;
+                this.parent = parent;
+                this.percentsize = calculatepercent();
                 foreach (var child in d.EnumerateDirectories())
                 {
                     Treefile childtree = new Treefile(child);
@@ -86,6 +108,11 @@ namespace SeperateFileTest
                 }
             }
 
+            private string calculatepercent()
+            {
+                return Math.Round((Decimal)(this.Size / parent.Size), 2) + "%";
+            }
+
             // get the size of all the files in the current directory and recursivelly call all the subdirectories to get their file sizes
             public static long getSize(DirectoryInfo d)
             {
@@ -94,6 +121,7 @@ namespace SeperateFileTest
                 foreach (FileInfo fi in d.GetFiles())
                 {
                     Size += fi.Length;
+
                 }
                 foreach (DirectoryInfo di in d.GetDirectories())
                 {
@@ -125,6 +153,10 @@ namespace SeperateFileTest
             catch (System.UnauthorizedAccessException)
             {
                 MessageBox.Show("This program does not have access to all the files in this directory");
+            }
+            catch (System.IO.PathTooLongException)
+            {
+                MessageBox.Show("This filepath does meet the required length of < 260 characters");
             }
         }
     }
