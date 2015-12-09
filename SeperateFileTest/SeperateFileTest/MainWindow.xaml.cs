@@ -77,6 +77,7 @@ namespace SeperateFileTest
                 Size = getSize(d);
                 myDir = d;
                 parent = this;
+                this.percentsize = calculatepercent();
                 foreach (var child in d.EnumerateDirectories())
                 {
                     Treefile childtree = new Treefile(child);
@@ -99,7 +100,7 @@ namespace SeperateFileTest
                 this.percentsize = calculatepercent();
                 foreach (var child in d.EnumerateDirectories())
                 {
-                    Treefile childtree = new Treefile(child);
+                    Treefile childtree = new Treefile(child, this);
                     ChildDirectories.Add(childtree);
                 }
                 foreach (var c in myDir.EnumerateFiles())
@@ -110,7 +111,14 @@ namespace SeperateFileTest
 
             private string calculatepercent()
             {
-                return Math.Round((Decimal)(this.Size / parent.Size), 2) + "%";
+                if(parent.Size != 0)
+                {
+                    return Math.Round((Decimal)(this.Size / parent.Size), 2) + "%";
+                }
+                else
+                {
+                    return 0 + "%";
+                }
             }
 
             // get the size of all the files in the current directory and recursivelly call all the subdirectories to get their file sizes
