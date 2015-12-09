@@ -16,6 +16,9 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Canvas Width="100" Height="10" Name="myCanvas">
+                            <Rectangle Width="100" Height="10" Fill="#FFFD1414" ></Rectangle>
+                        </Canvas>
                         <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5" Width="200">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -25,6 +28,8 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                       
+                        
                     </StackPanel>
                 </StackPanel>
             </HierarchicalDataTemplate>
@@ -35,6 +40,9 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Canvas Width="100" Height="10" Name="myCanvas">
+                            <Rectangle Width="100" Height="10" Fill="#FFFD1414" ></Rectangle>
+                        </Canvas>
                         <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" Width="200">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -53,8 +61,10 @@
             <Button Content="Search" Name="srchbtn" Height="22" Margin="0,5,0,10" Click="srchbtn_Click"></Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
+            
             <Label Content="Directories" Width="200" Margin="10,0,0,0"></Label>
             <Label Content="Size" Width="200"></Label>
+            <Label Content="Percent Of Parent" Width="200"></Label>
             <Label Content="Files" Width="200"></Label>
         </StackPanel>
         <TreeView  Height="488" ItemsSource="{Binding}" 
