@@ -14,7 +14,14 @@ namespace SeperateFileTest
         {
             if (value != null)
             {
-                var size = ((decimal)value * 100);
+                if((Decimal)value == 1)
+                {
+                    return 100;
+                }
+                else
+                {
+                    return (decimal)value;
+                }
             }
             return value;
         }

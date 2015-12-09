@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeperateFileTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="548" Width="790.5">
+        Title="MainWindow" Height="548" Width="1220.5">
     <Window.Resources>
         <local:filesizeconvertor x:Key="filesizeconvertor"/>
         <local:RectangleConverter x:Key="RectangleConverter"/>
@@ -29,8 +29,10 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                       
-                        
+
+                        <TextBlock Text="{Binding Path=numberoffiles}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=numberofdirectories}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                     </StackPanel>
                 </StackPanel>
             </HierarchicalDataTemplate>
@@ -41,7 +43,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Canvas Width="100" Height="10" Name="myCanvas">
+                        <Canvas Width="{Binding Path=percentsize, Converter={StaticResource RectangleConverter}}" Height="10" Name="myCanvas">
                             <Rectangle Width="{Binding Path=percentsize, Converter={StaticResource RectangleConverter}}" Height="10" Fill="#FFFD1414" ></Rectangle>
                         </Canvas>
                         <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" Width="200">
@@ -53,6 +55,12 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                       <!-- 
+                        Personal Feature: Cody Clawson
+                        -->
+                        <TextBlock Text="{Binding Path=numberoffiles}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=numberofdirectories}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                     </StackPanel>
                 </StackPanel>
             </HierarchicalDataTemplate>
@@ -66,7 +74,10 @@
             <Label Content="Directories" Width="200" Margin="10,0,0,0"></Label>
             <Label Content="Size" Width="200"></Label>
             <Label Content="Percent Of Parent" Width="200"></Label>
-            <Label Content="Files" Width="200"></Label>
+            <Label Content="Files" Width="166"></Label>
+            <Label Content="Number of Files" Width="113"/>
+            <Label Content="Number of Directories" Width="200"></Label>
+
         </StackPanel>
         <TreeView  Height="488" ItemsSource="{Binding}" 
         	ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView"  Margin="15,0,10,0"  />

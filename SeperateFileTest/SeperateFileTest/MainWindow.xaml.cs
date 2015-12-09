@@ -38,10 +38,25 @@ namespace SeperateFileTest
             public string Name { get; set; }
             public decimal percentsize { get; set; }
             public long Size { get; set; }
-            public Treefile parent { get; set; }
+            public long parent { get; set; }
             public DirectoryInfo myDir { get; set; }
             private ObservableCollection<Treefile> childTopicsValue = new ObservableCollection<Treefile>();
             private ObservableCollection<FileInfo> childfilevalues = new ObservableCollection<FileInfo>();
+
+
+
+            /*
+            PERSONAL FEATURE: Cody Clawson
+                I added the values to represent the number of files in a directory and the
+                number of subdirectories a directory has. 
+                This helped me learn how to do a basic bind to an object inside of a custom class
+                using a template. This is not all the features i wanted to add, but we lost a lot 
+                of time trying to get the basic structure to display properly
+            */
+
+            public int numberoffiles { get; set; }
+            public int numberofdirectories { get; set; }
+
 
             // stores all the subdirectories of this treefile
             public ObservableCollection<Treefile> ChildDirectories
@@ -75,49 +90,58 @@ namespace SeperateFileTest
             {
                 Name = d.Name;
                 Size = getSize(d);
+                numberoffiles = 0;
+                numberofdirectories = 0;
                 myDir = d;
-                parent = this;
+                parent = this.Size;
                 this.percentsize = calculatepercent();
                 foreach (var child in d.EnumerateDirectories())
                 {
-                    Treefile childtree = new Treefile(child);
+                    this.numberofdirectories += 1;
+                    Treefile childtree = new Treefile(child, this.Size);
                     ChildDirectories.Add(childtree);
                 }
                 foreach (var c in myDir.EnumerateFiles())
                 {
+                    this.numberoffiles += 1;
                     Childfiles.Add(c);
                 }
             }
             //constructor takes a directory and a parent and gets its size and name and creates a new treefile for all of its subdirectories
             // the parent is used to get the percent of parent parameter
 
-            public Treefile(DirectoryInfo d, Treefile parent)
+            public Treefile(DirectoryInfo d, long parent)
             {
                 Name = d.Name;
+                numberoffiles = 0;
+                numberofdirectories = 0;
                 Size = getSize(d);
                 myDir = d;
                 this.parent = parent;
                 this.percentsize = calculatepercent();
                 foreach (var child in d.EnumerateDirectories())
                 {
-                    Treefile childtree = new Treefile(child, this);
+                    this.numberofdirectories += 1;
+                    Treefile childtree = new Treefile(child, this.Size);
                     ChildDirectories.Add(childtree);
                 }
                 foreach (var c in myDir.EnumerateFiles())
                 {
+                    this.numberoffiles += 1;
                     Childfiles.Add(c);
                 }
             }
 
             private decimal calculatepercent()
             {
-                if(parent.Size != 0)
+                if (this.Size != 0)
                 {
-                    return Math.Round((Decimal)(this.Size / parent.Size), 2);
+                    //Console.WriteLine("" + this.Size + "/ " + parent + "=" + (decimal)this.Size / parent);
+                    return (decimal)(parent / this.Size);
                 }
                 else
                 {
-                    return 0 ;
+                    return 0;
                 }
             }
 
