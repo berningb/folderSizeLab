@@ -58,6 +58,6 @@
             <Label Content="Files" Width="200"></Label>
         </StackPanel>
         <TreeView  Height="488" ItemsSource="{Binding}" 
-        	ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView"  Margin="15,0,0,0"  />
+        	ItemTemplate="{StaticResource NameTemplate}" x:Name="myTreeView"  Margin="15,0,10,0"  />
     </StackPanel>
 </Window>
