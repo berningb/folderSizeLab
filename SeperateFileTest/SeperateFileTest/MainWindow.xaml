@@ -8,6 +8,7 @@
         Title="MainWindow" Height="548" Width="790.5">
     <Window.Resources>
         <local:filesizeconvertor x:Key="filesizeconvertor"/>
+        <local:RectangleConverter x:Key="RectangleConverter"/>
     </Window.Resources>
     <StackPanel>
         <StackPanel.Resources>
@@ -17,7 +18,7 @@
                         <TextBlock FontStyle="Italic" Text="{Binding Path=Name}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Canvas Width="100" Height="10" Name="myCanvas">
-                            <Rectangle Width="100" Height="10" Fill="#FFFD1414" ></Rectangle>
+                            <Rectangle Width="{Binding Path=percentsize, Converter={StaticResource RectangleConverter}}" Height="10" Fill="#FFFD1414" ></Rectangle>
                         </Canvas>
                         <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5" Width="200">
                             <ListBox.ItemTemplate>
@@ -41,7 +42,7 @@
                         <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Path=Size, Converter={StaticResource filesizeconvertor}}" FontWeight="Bold" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Canvas Width="100" Height="10" Name="myCanvas">
-                            <Rectangle Width="100" Height="10" Fill="#FFFD1414" ></Rectangle>
+                            <Rectangle Width="{Binding Path=percentsize, Converter={StaticResource RectangleConverter}}" Height="10" Fill="#FFFD1414" ></Rectangle>
                         </Canvas>
                         <ListBox ItemsSource="{Binding Childfiles}" BorderThickness="0" Width="200">
                             <ListBox.ItemTemplate>

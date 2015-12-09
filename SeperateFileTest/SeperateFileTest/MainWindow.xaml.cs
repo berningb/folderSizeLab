@@ -36,7 +36,7 @@ namespace SeperateFileTest
         public class Treefile
         {
             public string Name { get; set; }
-            public string percentsize { get; set; }
+            public decimal percentsize { get; set; }
             public long Size { get; set; }
             public Treefile parent { get; set; }
             public DirectoryInfo myDir { get; set; }
@@ -109,15 +109,15 @@ namespace SeperateFileTest
                 }
             }
 
-            private string calculatepercent()
+            private decimal calculatepercent()
             {
                 if(parent.Size != 0)
                 {
-                    return Math.Round((Decimal)(this.Size / parent.Size), 2) + "%";
+                    return Math.Round((Decimal)(this.Size / parent.Size), 2);
                 }
                 else
                 {
-                    return 0 + "%";
+                    return 0 ;
                 }
             }
 
